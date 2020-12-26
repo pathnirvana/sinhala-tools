@@ -1,5 +1,3 @@
 node_modules
-dev/silumina/2017
-dev/silumina/2018
-dev/silumina/2019
-dev/silumina/2020
+dev/silumina/20*
+dev/silumina/20??.zip
