@@ -45,6 +45,8 @@ mawbimaFiles.forEach(fileStart => {
     addContents(contents)
 })
 
+// todo add the buddhist-books here as well
+
 // compute tokens
 const pairs = Object.entries(tokens).sort((a, b) => b[1] - a[1])
 console.log(`#articles: ${totalArticles}, #words: ${totalWords}. writing ${pairs.length} tokens`)

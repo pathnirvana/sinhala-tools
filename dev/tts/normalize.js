@@ -88,6 +88,14 @@ function normalizeDate(year, month, date) {
 }
 
 function normalizeText(text) {
+    // replace yya and ththa with ya and tha - easy to say and for the algo too
+    // bru and bra with al version without rakaransa
+    // reph with ra+al
+    text = text.replace(/\u200d/g, '')
+    text = text.replace(/ය්ය/g, 'ය')
+    text = text.replace(/ර්ත්ථ/g, 'ර්ථ')
+    text = text.replace(/ත්ත්/g, 'ත්')
+
     text = text.replace(abbrRegex, (m, p1, p2) => abbra[p1] + p2)
     
     text = text.replace(rsBeginRegex, (m, prs, p1, p2) => getCurrency(p1, p2)) 
@@ -97,7 +105,7 @@ function normalizeText(text) {
     text = text.replace(/(\d+) ?- ?(\d+)/g, (m, n1, n2) => normalizeNumber(n1) + ' සිට ' + normalizeNumber(n2)) // රින or minus is not common in tts applications
     // todo add time xx:xx format with am/pm පෙ.ව. ප.ව.
     
-    // todo දී should get ඒ added
+    // todo දී/න් should get ඒ added
     text = text.replace(percentRegex, (m, p1, p2) => 'සියයට ' + normalizeNumber(p1, p2)) // percentages num% - සියයට අසූවක්
     // වැනිදා වැනි වන දෙනකුට දෙනා should get X form. (todo except for 4 and 5 10 should get හතර and පස් දහ instead)
     text = text.replace(/(^| )(\d+) ?(වැනි|වෙනි|වන|දෙනකු|දෙනා|දෙනෙ)/g, (m, b, p1, p2) => b + normalizeNumber(p1, '', true) + ' ' + p2) 
@@ -123,7 +131,8 @@ const testStr = [
     ['2020-02-30 2030/34/22 1567.12.1', 'දෙදහස් විස්ස වර්ෂයේ පෙබරවාරි තිහ දෙදහස් තිහ/තිස් හතර/විසි දෙක එක්දහස් පන්සිය හැට හත වර්ෂයේ දෙසැම්බර් එක'],
     ['70.2% ක් වැඩිවේ', 'සියයට හැත්තෑවයි දශම දෙක ක් වැඩිවේ'],
     ['10 වෙනිදා 5 දෙනෙක්', 'දස වෙනිදා පන් දෙනෙක්'],
-    ['1,000,000 : 1,000,000,000 : 10,0000000,0000000 : 1,000,001 : 100', 'දසලක්ෂය : සිය කෝටිය : දසප්‍රකෝටිය : දසලක්ෂ එක : සීය']
+    ['1,000,000 : 1,000,000,000 : 10,0000000,0000000 : 1,000,001 : 100', 'දසලක්ෂය : සිය කෝටිය : දසප්‍රකෝටිය : දසලක්ෂ එක : සීය'],
+    ['සත්ත්වයා ආර්‍ය්‍ය අර්‍ත්‍ථය', 'සත්වයා ආර්ය අර්ථය'],
 ]
 
 testStr.forEach(([ts, exp]) => {

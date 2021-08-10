@@ -7,8 +7,11 @@
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.5",
     "iohook": "^0.6.6",
+    "jquery": "^3.5.1",
+    "jsdom": "^16.4.0",
     "json-beautify": "^1.1.1",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.20",
+    "vkbeautify": "^0.99.3"
   },
   "devDependencies": {},
   "scripts": {
